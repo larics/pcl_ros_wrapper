@@ -9,3 +9,11 @@ Depends, of course, on PCL. Install as follows:
 ```bash
 sudo apt install libpcl-dev
 ```
+
+## Description
+
+A brief description of wrapped components.
+
+### Registration
+
+**[icp.hpp](include/pcl_ros_wrapper/registration/icp.hpp)** - Provides useful function for aligning point clouds using the Iterative Closest Point Method (ICP)

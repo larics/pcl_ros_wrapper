@@ -16,3 +16,6 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 
 add_library(registration_wrapper src/registration/icp.cpp)
 target_link_libraries(registration_wrapper ${PCL_LIBRARIES})
+
+add_executable(crop_box_example examples/crop_box.cpp)
+target_link_libraries(crop_box_example ${PCL_LIBRARIES})

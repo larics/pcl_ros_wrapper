@@ -14,8 +14,15 @@ catkin_package(INCLUDE_DIRS include LIBRARIES pcl_wrapper DEPENDS PCL)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 
+# LIBRARIES
+
 add_library(registration_wrapper src/registration/icp.cpp)
 target_link_libraries(registration_wrapper ${PCL_LIBRARIES})
 
+# EXAMPLES
+
 add_executable(crop_box_example examples/crop_box.cpp)
 target_link_libraries(crop_box_example ${PCL_LIBRARIES})
+
+add_executable(voxel_grid_example examples/voxel_grid.cpp)
+target_link_libraries(voxel_grid_example ${PCL_LIBRARIES})

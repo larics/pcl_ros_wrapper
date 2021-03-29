@@ -27,8 +27,7 @@ namespace filters {
   {
     using CloudType = RemoveConst<element_type_t<T>>;
     using PointType = typename CloudType::value_type;
-
-    auto output = boost::make_shared<CloudType>();
+    auto output     = boost::make_shared<CloudType>();
 
     pcl::CropBox<PointType> boxFilter;
     // Check if pointer

@@ -17,3 +17,7 @@ A brief description of wrapped components.
 ### Registration
 
 **[icp.hpp](include/pcl_ros_wrapper/registration/icp.hpp)** - Provides useful function for aligning point clouds using the Iterative Closest Point Method (ICP)
+
+### Filters
+
+**[crop_box.hpp](include/pcl_ros_wrapper/filters/crop_box.hpp)** - A box filter wrapper

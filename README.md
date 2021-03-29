@@ -21,3 +21,4 @@ A brief description of wrapped components.
 ### Filters
 
 **[crop_box.hpp](include/pcl_ros_wrapper/filters/crop_box.hpp)** - A box filter wrapper
+**[voxel.hpp](include/pcl_ros_wrapper/filters/voxel.hpp)** - A voxel grid wrapper

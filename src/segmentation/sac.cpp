@@ -1,3 +1,9 @@
+#include <pcl/common/common.h>
+#include <pcl/common/centroid.h>
+#include <pcl/filters/extract_indices.h>
+#include <pcl/kdtree/kdtree.h>
+#include <pcl/segmentation/extract_clusters.h>
+
 #include <pcl_ros_wrapper/segmentation/sac.hpp>
 
 void pcl_ros_wrapper::segmentation::crop_ground_plane(
@@ -106,4 +112,45 @@ void pcl_ros_wrapper::segmentation::iterative_ground_plane_filter(
     *input = *temp_cloud;
     i++;
   }
+}
+
+std::vector<pcl_ros_wrapper::PointCloudT::Ptr>
+  pcl_ros_wrapper::segmentation::do_euclidean_clustering(
+    const PointCloudT::ConstPtr& input,
+    const cluster_params&        params,
+    bool                         verbose)
+{
+  if (input->empty()) { return std::vector<PointCloudT::Ptr>(); }
+
+  // Creating the KdTree object for the search method of the extraction
+  auto tree = boost::make_shared<pcl::search::KdTree<pcl::PointXYZ>>();
+  tree->setInputCloud(input);
+
+  std::vector<pcl::PointIndices>                 cluster_indices;
+  pcl::EuclideanClusterExtraction<pcl::PointXYZ> ec;
+  ec.setClusterTolerance(params.cluster_tolerance);// 2cm
+  ec.setMinClusterSize(params.min_cluster_size);
+  ec.setMaxClusterSize(params.max_cluster_size);
+  ec.setSearchMethod(tree);
+  ec.setInputCloud(input);
+  ec.extract(cluster_indices);
+
+  std::vector<PointCloudT::Ptr> output;
+  for (const auto& point_indices : cluster_indices) {
+    auto cloud_cluster = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
+    for (const auto& point_index : point_indices.indices) {
+      cloud_cluster->push_back((*input)[point_index]);//*
+    }
+    cloud_cluster->width    = cloud_cluster->size();
+    cloud_cluster->height   = 1;
+    cloud_cluster->is_dense = true;
+    output.emplace_back(cloud_cluster);
+
+    if (verbose) {
+      std::cout << "PointCloud representing the Cluster: " << cloud_cluster->size()
+                << " data points." << std::endl;
+    }
+  }
+
+  return output;
 }

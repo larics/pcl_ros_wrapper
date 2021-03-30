@@ -1,9 +1,6 @@
 #ifndef SAC_SEGMENTATION_HPP
 #define SAC_SEGMENTATION_HPP
 
-#include <pcl/common/common.h>
-#include <pcl/common/centroid.h>
-#include <pcl/filters/extract_indices.h>
 #include <pcl/segmentation/sac_segmentation.h>
 #include <boost/make_shared.hpp>
 
@@ -82,7 +79,7 @@ namespace segmentation {
 
   /**
    * @brief Iteratively detect and remove ground planes from the given point cloud.
-   * 
+   *
    * @param input Given point cloud.
    * @param params Plane detection parameters.
    * @param max_iters_plane_removal Maximum iteration for plane removal.
@@ -92,6 +89,31 @@ namespace segmentation {
                                      const plane_detection_params& params,
                                      int  max_iters_plane_removal,
                                      bool verbose = false);
+
+  /**
+   * @brief Parameters used for pointcloud clustering.
+   * 
+   */
+  struct cluster_params
+  {
+    int    min_cluster_size;
+    int    max_cluster_size;
+    double cluster_tolerance;
+  };
+
+  /**
+   * @brief Perform distance-based (euclidean) clustering on the given input cloud.
+   * 
+   * @param input Given point cloud input.
+   * @param params Clustering parameters.
+   * @param verbose Output shown if true.
+   * @return Vector of pointers to pointcloud clusters. 
+   */
+  std::vector<PointCloudT::Ptr> do_euclidean_clustering(
+    const PointCloudT::ConstPtr& input,
+    const cluster_params&        params,
+    bool                         verbose = false);
+
 }// namespace segmentation
 }// namespace pcl_ros_wrapper
 

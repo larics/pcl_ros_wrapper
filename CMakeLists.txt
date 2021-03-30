@@ -10,7 +10,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(catkin REQUIRED)
 find_package(PCL 1.7 REQUIRED)
 
-catkin_package(INCLUDE_DIRS include LIBRARIES pcl_wrapper DEPENDS PCL)
+catkin_package(
+  INCLUDE_DIRS
+  include
+  LIBRARIES
+  pcl_wrapper
+  sample_consensus_wrapper
+  DEPENDS
+  PCL)
 
 include_directories(include ${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 
@@ -18,6 +25,9 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 
 add_library(registration_wrapper src/registration/icp.cpp)
 target_link_libraries(registration_wrapper ${PCL_LIBRARIES})
+
+add_library(sample_consensus_wrapper src/segmentation/sac.cpp)
+target_link_libraries(sample_consensus_wrapper ${PCL_LIBRARIES})
 
 # EXAMPLES
 
@@ -31,4 +41,4 @@ add_executable(outlier_filter_example examples/outlier_filter.cpp)
 target_link_libraries(outlier_filter_example ${PCL_LIBRARIES})
 
 add_executable(sample_consensus_example examples/sample_consensus.cpp)
-target_link_libraries(sample_consensus_example ${PCL_LIBRARIES})
+target_link_libraries(sample_consensus_example ${PCL_LIBRARIES} sample_consensus_wrapper)

@@ -26,3 +26,6 @@ target_link_libraries(crop_box_example ${PCL_LIBRARIES})
 
 add_executable(voxel_grid_example examples/voxel_grid.cpp)
 target_link_libraries(voxel_grid_example ${PCL_LIBRARIES})
+
+add_executable(outlier_filter_example examples/outlier_filter.cpp)
+target_link_libraries(outlier_filter_example ${PCL_LIBRARIES})

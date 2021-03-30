@@ -1,5 +1,5 @@
-#ifndef VOXEL_HPP
-#define VOXEL_HPP
+#ifndef VOXEL_GRID_FILTER_HPP
+#define VOXEL_GRID_FILTER_HPP
 
 #include <pcl/filters/voxel_grid.h>
 #include <pcl_ros_wrapper/common/types.hpp>
@@ -42,4 +42,4 @@ namespace filters {
 }// namespace filters
 }// namespace pcl_ros_wrapper
 
-#endif /* VOXEL_HPP */
+#endif /* VOXEL_GRID_FILTER_HPP */

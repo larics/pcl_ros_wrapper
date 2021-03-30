@@ -1,5 +1,5 @@
-#ifndef CROP_BOX_HPP
-#define CROP_BOX_HPP
+#ifndef CROP_BOX_FILTER_HPP
+#define CROP_BOX_FILTER_HPP
 
 #include <pcl/filters/crop_box.h>
 #include <pcl_ros_wrapper/common/types.hpp>
@@ -78,4 +78,4 @@ namespace filters {
 
 }// namespace filters
 }// namespace pcl_ros_wrapper
-#endif /* CROP_BOX_HPP */
+#endif /* CROP_BOX_FILTER_HPP */

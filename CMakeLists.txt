@@ -29,3 +29,6 @@ target_link_libraries(voxel_grid_example ${PCL_LIBRARIES})
 
 add_executable(outlier_filter_example examples/outlier_filter.cpp)
 target_link_libraries(outlier_filter_example ${PCL_LIBRARIES})
+
+add_executable(sample_consensus_example examples/sample_consensus.cpp)
+target_link_libraries(sample_consensus_example ${PCL_LIBRARIES})

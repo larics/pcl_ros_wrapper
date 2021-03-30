@@ -23,3 +23,7 @@ A brief description of wrapped components.
 * **[crop_box.hpp](include/pcl_ros_wrapper/filters/crop_box.hpp)** - A box filter wrapper
 * **[voxel.hpp](include/pcl_ros_wrapper/filters/voxel.hpp)** - A voxel grid wrapper
 * **[outlier.hpp](include/pcl_ros_wrapper/filters/outlier.hpo)** - A statistical outlier filter wrapper
+
+### Segmentation
+
+* **[sample_consensus.hpp](include/pcl_ros_wrapper/segmentation/sample_consensus.hpp)** - Useful wrappers around the Sample Consesus methods (e.g. plane detection)

@@ -154,3 +154,18 @@ std::vector<pcl_ros_wrapper::PointCloudT::Ptr>
 
   return output;
 }
+
+pcl_ros_wrapper::PointCloudT::Ptr pcl_ros_wrapper::segmentation::project_to_plane(
+  const PointCloudT::Ptr&            cloud,
+  const pcl::ModelCoefficients::Ptr& coefficients)
+{
+  auto projected_cloud = boost::make_shared<PointCloudT>();
+
+  pcl::ProjectInliers<pcl::PointXYZ> proj;
+  proj.setModelType(pcl::SACMODEL_PLANE);
+  proj.setInputCloud(cloud);
+  proj.setModelCoefficients(coefficients);
+  proj.filter(*projected_cloud);
+
+  return projected_cloud;
+}

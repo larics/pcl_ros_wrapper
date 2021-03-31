@@ -2,6 +2,7 @@
 #define SAC_SEGMENTATION_HPP
 
 #include <pcl/segmentation/sac_segmentation.h>
+#include <pcl/filters/project_inliers.h>
 #include <boost/make_shared.hpp>
 
 #include <pcl_ros_wrapper/common/types.hpp>
@@ -92,7 +93,7 @@ namespace segmentation {
 
   /**
    * @brief Parameters used for pointcloud clustering.
-   * 
+   *
    */
   struct cluster_params
   {
@@ -103,17 +104,26 @@ namespace segmentation {
 
   /**
    * @brief Perform distance-based (euclidean) clustering on the given input cloud.
-   * 
+   *
    * @param input Given point cloud input.
    * @param params Clustering parameters.
    * @param verbose Output shown if true.
-   * @return Vector of pointers to pointcloud clusters. 
+   * @return Vector of pointers to pointcloud clusters.
    */
   std::vector<PointCloudT::Ptr> do_euclidean_clustering(
     const PointCloudT::ConstPtr& input,
     const cluster_params&        params,
     bool                         verbose = false);
 
+  /**
+   * @brief Project point cloud to a plane.
+   *
+   * @param cloud Given point cloud.
+   * @param coefficients Given plane coefficients.
+   * @return A Pointer to the projected point cloud.
+   */
+  PointCloudT::Ptr project_to_plane(const PointCloudT::Ptr&            cloud,
+                                    const pcl::ModelCoefficients::Ptr& coefficients);
 }// namespace segmentation
 }// namespace pcl_ros_wrapper
 

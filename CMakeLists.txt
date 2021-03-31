@@ -26,8 +26,11 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
 add_library(registration_wrapper src/registration/icp.cpp)
 target_link_libraries(registration_wrapper ${PCL_LIBRARIES})
 
-add_library(sample_consensus_wrapper src/segmentation/sac.cpp)
-target_link_libraries(sample_consensus_wrapper ${PCL_LIBRARIES})
+add_library(segmentation_wrapper src/segmentation/sac.cpp)
+target_link_libraries(segmentation_wrapper ${PCL_LIBRARIES})
+
+add_library(filters_wrapper src/filters/upsampling.cpp)
+target_link_libraries(filters_wrapper ${PCL_LIBRARIES})
 
 # EXAMPLES
 
@@ -41,4 +44,4 @@ add_executable(outlier_filter_example examples/outlier_filter.cpp)
 target_link_libraries(outlier_filter_example ${PCL_LIBRARIES})
 
 add_executable(sample_consensus_example examples/sample_consensus.cpp)
-target_link_libraries(sample_consensus_example ${PCL_LIBRARIES} sample_consensus_wrapper)
+target_link_libraries(sample_consensus_example ${PCL_LIBRARIES} segmentation_wrapper)

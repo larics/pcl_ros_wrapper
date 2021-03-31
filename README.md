@@ -1,5 +1,9 @@
 # PCL ROS Wrapper
 
+| Doxygen |
+|--------------------------------------------------------------------------------------------------------------------------------|
+| [![Docs](https://github.com/lmark1/uav_ros_lib/workflows/Docs/badge.svg)](https://github.com/lmark1/uav_ros_lib/actions) |
+
 A wrapper around some of useful Point Cloud Library (PCL) components.  
 Useful in combination with ROS messages such as ```sensor_msgs/PointCloud2```.
 
@@ -9,7 +13,9 @@ Depends, of course, on PCL. Install as follows:
 ```bash
 sudo apt install libpcl-dev
 ```
+## Documentation
 
+Documentation can be found at [lmark1.github.io/pcl_ros_wrapper](https://lmark1.github.io/pcl_ros_wrapper/).
 ## Description
 
 A brief description of wrapped components.

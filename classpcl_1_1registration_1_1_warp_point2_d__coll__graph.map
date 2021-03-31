@@ -1,0 +1,4 @@
+<map id="pcl::registration::WarpPoint2D&lt; PointSourceT, PointTargetT, Scalar &gt;" name="pcl::registration::WarpPoint2D&lt; PointSourceT, PointTargetT, Scalar &gt;">
+<area shape="rect" id="node1" title="WarpPoint2D enables 3D (1D rotation around yaw + 2D translation) transformations for points." alt="" coords="7,95,217,151"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,219,47"/>
+</map>

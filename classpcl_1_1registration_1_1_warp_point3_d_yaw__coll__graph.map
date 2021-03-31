@@ -1,0 +1,4 @@
+<map id="pcl::registration::WarpPoint3DYaw&lt; PointSourceT, PointTargetT, Scalar &gt;" name="pcl::registration::WarpPoint3DYaw&lt; PointSourceT, PointTargetT, Scalar &gt;">
+<area shape="rect" id="node1" title="WarpPoint3DYaw enables 4D (1D rotation around yaw + 3D translation) transformations for points." alt="" coords="5,95,228,151"/>
+<area shape="rect" id="node2" title=" " alt="" coords="10,5,223,47"/>
+</map>

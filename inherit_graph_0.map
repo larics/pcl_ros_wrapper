@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" title=" " alt="" coords="5,140,127,167"/>
+<area shape="rect" id="node2" href="$classpcl_1_1registration_1_1_warp_point2_d.html" title="WarpPoint2D enables 3D (1D rotation around yaw + 2D translation) transformations for points." alt="" coords="181,5,391,61"/>
+<area shape="rect" id="node3" href="$classpcl_1_1registration_1_1_warp_point2_d_yaw.html" title="WarpPoint2DYaw enables 3D (1D rotation around yaw + 2D translation) transformations for points." alt="" coords="175,85,397,141"/>
+<area shape="rect" id="node4" href="$classpcl_1_1registration_1_1_warp_point3_d_yaw.html" title="WarpPoint3DYaw enables 4D (1D rotation around yaw + 3D translation) transformations for points." alt="" coords="175,165,397,221"/>
+<area shape="rect" id="node5" href="$classpcl_1_1registration_1_1_warp_point_yaw.html" title="WarpPointYaw enables 1D rotation around yaw transformations for points." alt="" coords="177,245,395,301"/>
+</map>

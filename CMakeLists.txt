@@ -32,7 +32,7 @@ target_link_libraries(segmentation_wrapper ${PCL_LIBRARIES})
 add_library(filters_wrapper src/filters/upsampling.cpp)
 target_link_libraries(filters_wrapper ${PCL_LIBRARIES})
 
-add_library(common_wrapper src/common/general.cpp)
+add_library(common_wrapper src/common/general.cpp src/common/surface.cpp)
 target_link_libraries(common_wrapper ${PCL_LIBRARIES})
 
 # EXAMPLES

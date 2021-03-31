@@ -15,7 +15,8 @@ sudo apt install libpcl-dev
 A brief description of wrapped components.
 
 ### Common
-* **[general.hpp](include/pcl_ros_wrapper/common/general.hpp)** - Contains useful functions for handling pointclouds (e.g. load, save, convert, ...)
+* **[general.hpp](include/pcl_ros_wrapper/common/general.hpp)** - Contains useful functions for handling pointclouds (e.g. load, save, convert, etc.)
+* **[surface.hpp](include/pcl_ros_wrapper/common/surface.hpp)** - Contains useful functions dealing with surface-based methods (e.g. concave/convex hull, normal estimation, etc.)
 ### Registration
 
 * **[icp.hpp](include/pcl_ros_wrapper/registration/icp.hpp)** - Provides useful function for aligning point clouds using the Iterative Closest Point Method (ICP)
@@ -29,4 +30,4 @@ A brief description of wrapped components.
 
 ### Segmentation
 
-* **[sac.hpp](include/pcl_ros_wrapper/segmentation/sac.hpp)** - Useful wrappers around the Sample Consesus methods (e.g. plane detection, clustering, ...)
+* **[sac.hpp](include/pcl_ros_wrapper/segmentation/sac.hpp)** - Useful wrappers around the Sample Consesus methods (e.g. plane detection, clustering, etc.)

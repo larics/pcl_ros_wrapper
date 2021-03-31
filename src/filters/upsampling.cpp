@@ -4,7 +4,7 @@ pcl_ros_wrapper::PointCloudT::Ptr pcl_ros_wrapper::filters::do_upsampling(
   PointCloudT::Ptr& cloud,
   upsampling_params params)
 {
-  auto output = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
+  auto                              output = boost::make_shared<PointCloudT>();
   pcl::PointCloud<pcl::PointNormal> mls_points;
   auto tree = boost::make_shared<pcl::search::KdTree<pcl::PointXYZ>>();
   pcl::MovingLeastSquares<pcl::PointXYZ, pcl::PointNormal> mls;
@@ -29,7 +29,6 @@ pcl_ros_wrapper::PointCloudT::Ptr pcl_ros_wrapper::filters::do_upsampling(
 
   mls.process(mls_points);
 
-  // for (int i = 0; i < mls_points.points.size(); ++i) {
   for (const auto& point : mls_points.points) {
     output->points.emplace_back(point.x, point.y, point.z);
   }

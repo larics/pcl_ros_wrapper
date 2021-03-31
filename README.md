@@ -14,6 +14,8 @@ sudo apt install libpcl-dev
 
 A brief description of wrapped components.
 
+### Common
+* **[general.hpp](include/pcl_ros_wrapper/common/general.hpp)** - Contains useful functions handling pointclouds
 ### Registration
 
 * **[icp.hpp](include/pcl_ros_wrapper/registration/icp.hpp)** - Provides useful function for aligning point clouds using the Iterative Closest Point Method (ICP)
@@ -21,7 +23,7 @@ A brief description of wrapped components.
 ### Filters
 
 * **[crop_box.hpp](include/pcl_ros_wrapper/filters/crop_box.hpp)** - A box filter wrapper
-* **[voxel.hpp](include/pcl_ros_wrapper/filters/voxel.hpp)** - A voxel grid wrapper
+* **[voxel.hpp](include/pcl_ros_wrapper/filters/voxel.hpp)** - A voxel grid filter wrapper
 * **[outlier.hpp](include/pcl_ros_wrapper/filters/outlier.hpo)** - A statistical outlier filter wrapper
 * **[upsampling.hpp](include/pcl_ros_wrapper/filters/upsampling.hpp)** - An upsampling filter wrapper
 

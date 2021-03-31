@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED roscpp roslib)
 find_package(PCL 1.7 REQUIRED)
 
 catkin_package(
@@ -31,6 +31,9 @@ target_link_libraries(segmentation_wrapper ${PCL_LIBRARIES})
 
 add_library(filters_wrapper src/filters/upsampling.cpp)
 target_link_libraries(filters_wrapper ${PCL_LIBRARIES})
+
+add_library(common_wrapper src/common/general.cpp)
+target_link_libraries(common_wrapper ${PCL_LIBRARIES})
 
 # EXAMPLES
 

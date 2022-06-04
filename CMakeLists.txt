@@ -14,8 +14,10 @@ catkin_package(
   INCLUDE_DIRS
   include
   LIBRARIES
-  pcl_wrapper
-  sample_consensus_wrapper
+  registration_wrapper
+  segmentation_wrapper
+  filters_wrapper
+  common_wrapper
   DEPENDS
   PCL)
 

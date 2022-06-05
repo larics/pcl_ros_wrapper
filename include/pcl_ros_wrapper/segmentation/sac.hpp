@@ -78,6 +78,19 @@ namespace segmentation {
                          double                        ground_depth = 1.5,
                          bool                          verbose      = false);
 
+
+  /**
+   * @brief Crop the largest ground plane from the given input cloud. Crop only detected plane points.
+   *
+   * @param input Given input cloud.
+   * @param params Plane detection parameters.
+   * @param ground_depth Depth of the cropped ground cloud.
+   * @param verbose Output shown if true.
+   */
+  void crop_ground_plane_smart(PointCloudT::Ptr&             input,
+                         const plane_detection_params& params,
+                         bool                          verbose      = false);
+
   /**
    * @brief Iteratively detect and remove ground planes from the given point cloud.
    *
@@ -110,10 +123,9 @@ namespace segmentation {
    * @param verbose Output shown if true.
    * @return Vector of pointers to pointcloud clusters.
    */
-  std::vector<PointCloudT::Ptr> do_euclidean_clustering(
-    const PointCloudT::ConstPtr& input,
-    const cluster_params&        params,
-    bool                         verbose = false);
+  std::vector<PointCloudT::Ptr> do_euclidean_clustering(const PointCloudT::Ptr& input,
+                                                        const cluster_params&   params,
+                                                        bool verbose = false);
 
   /**
    * @brief Project point cloud to a plane.

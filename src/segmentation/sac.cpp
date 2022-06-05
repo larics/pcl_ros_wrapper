@@ -52,6 +52,39 @@ void pcl_ros_wrapper::segmentation::crop_ground_plane(
   *input = *temp_cloud;
 }
 
+
+void pcl_ros_wrapper::segmentation::crop_ground_plane_smart(
+  PointCloudT::Ptr&             input,
+  const plane_detection_params& params,
+  bool                          verbose)
+{
+  // Create the segmentation object for the planar model and set all the parameters
+  pcl::SACSegmentation<pcl::PointXYZ> seg;
+  auto                                inliers = boost::make_shared<pcl::PointIndices>();
+  auto coefficients = boost::make_shared<pcl::ModelCoefficients>();
+  auto cloud_plane  = boost::make_shared<PointCloudT>();
+  seg.setOptimizeCoefficients(true);
+  seg.setModelType(pcl::SACMODEL_PLANE);
+  seg.setMethodType(pcl::SAC_RANSAC);
+  seg.setMaxIterations(params.ransac_iterations);
+  seg.setDistanceThreshold(params.distance_threshold);
+  seg.setInputCloud(input);
+  seg.segment(*inliers, *coefficients);
+
+  if (inliers->indices.empty()) {
+    std::cout << "Could not estimate a planar model for the given dataset." << std::endl;
+    return;
+  }
+
+  auto                               temp_cloud = boost::make_shared<PointCloudT>();
+  pcl::ExtractIndices<pcl::PointXYZ> extract;
+  extract.setInputCloud(input);
+  extract.setIndices(inliers);
+  extract.setNegative(true);
+  extract.filter(*temp_cloud);
+  *input = *temp_cloud;
+}
+
 void pcl_ros_wrapper::segmentation::iterative_ground_plane_filter(
   PointCloudT::Ptr&             input,
   const plane_detection_params& params,
@@ -115,10 +148,9 @@ void pcl_ros_wrapper::segmentation::iterative_ground_plane_filter(
 }
 
 std::vector<pcl_ros_wrapper::PointCloudT::Ptr>
-  pcl_ros_wrapper::segmentation::do_euclidean_clustering(
-    const PointCloudT::ConstPtr& input,
-    const cluster_params&        params,
-    bool                         verbose)
+  pcl_ros_wrapper::segmentation::do_euclidean_clustering(const PointCloudT::Ptr& input,
+                                                         const cluster_params&   params,
+                                                         bool                    verbose)
 {
   if (input->empty()) { return std::vector<PointCloudT::Ptr>(); }
 

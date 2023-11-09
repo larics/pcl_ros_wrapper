@@ -76,6 +76,38 @@ namespace filters {
     return output;
   }
 
+  /**
+   * @brief Apply the Local Crop Box filter on the given point cloud.
+   *
+   * @tparam T Type of the given Point Cloud.
+   * @param input A given point cloud.
+	 * @param centroid A translation centroid.
+   * @param boxMin Minimum box coordinates.
+   * @param boxMax Maximum box coordinates.
+   * @param rpy Box rotation.
+   * @param negative True - normal crop box, false - inverted crop box
+   * @return PointCloudT::Ptr A cropped point cloud pointer
+   */
+  template<typename T>
+  static PointCloudT::Ptr do_local_crop_box(const T&               input,
+                                            const Eigen::Vector4f& centroid,
+                                            const Eigen::Vector4f& boxMin,
+                                            const Eigen::Vector4f& boxMax,
+                                            const Eigen::Vector3f& rpy,
+                                            bool                   negative = false)
+  {
+    auto                        output = boost::make_shared<PointCloudT>();
+    pcl::CropBox<pcl::PointXYZ> boxFilter;
+    boxFilter.setMax(boxMax);
+    boxFilter.setMin(boxMin);
+    boxFilter.setNegative(negative);
+    boxFilter.setTranslation(centroid.block<3, 1>(0, 0));
+    boxFilter.setRotation(rpy);
+    boxFilter.setInputCloud(input);
+    boxFilter.filter(*output);
+    return output;
+  }
+
 }// namespace filters
 }// namespace pcl_ros_wrapper
 #endif /* CROP_BOX_FILTER_HPP */

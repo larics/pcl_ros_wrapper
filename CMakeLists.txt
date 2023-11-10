@@ -7,7 +7,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(catkin REQUIRED roscpp roslib)
+find_package(catkin REQUIRED roscpp roslib tf)
 find_package(PCL 1.7 REQUIRED)
 
 catkin_package(
@@ -50,3 +50,8 @@ target_link_libraries(outlier_filter_example ${PCL_LIBRARIES})
 
 add_executable(sample_consensus_example examples/sample_consensus.cpp)
 target_link_libraries(sample_consensus_example ${PCL_LIBRARIES} segmentation_wrapper)
+
+# NODES
+add_executable(avg_depth nodes/avg_depth.cpp)
+target_link_libraries(avg_depth ${PCL_LIBRARIES})
+target_link_libraries(avg_depth ${catkin_LIBRARIES})

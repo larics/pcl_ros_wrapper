@@ -38,7 +38,7 @@ void pclCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud_ptr)
         sum += point.z;
     }
   h = sum/n;
-  ROS_INFO_STREAM("[AVG DEPTH] The height is: "<<h);
+  // ROS_INFO_STREAM("[AVG DEPTH] The height is: "<<h);
   std_msgs::Float32 avg_height_msg;
   avg_height_msg.data = h;
   alt_pub.publish(avg_height_msg);

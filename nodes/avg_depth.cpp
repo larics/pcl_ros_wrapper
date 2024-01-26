@@ -35,7 +35,8 @@ void avgDepthPubCallback(const ros::TimerEvent& event)
         sum += point.z;
     }
   h = sum/n;
-  // ROS_INFO_STREAM("[AVG DEPTH] The height is: "<<h);
+  ROS_INFO_STREAM("[AVG DEPTH] The height is: "<<h);
+  ROS_INFO_STREAM("[Current rate "<<rate);
   std_msgs::Float32 avg_height_msg;
   avg_height_msg.data = h;
   alt_pub.publish(avg_height_msg);
@@ -69,11 +70,11 @@ void imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
 }
 
 int main(int argc, char** argv){
-  ros::init(argc, argv, "camera_depth");
-  // ros::NodeHandle private_node("~");
+  ros::init(argc, argv, "avg_depth_node");
+  ros::NodeHandle private_node("~");
+  private_node.getParam("rate", rate); 
   
   ros::NodeHandle node;
-  node.getParam("/camera_depth/rate", rate); 
   ros::Subscriber imu_sub = node.subscribe("mavros/imu/data", 10, &imuCallback);
   ros::Subscriber pcl_sub = node.subscribe("camera/depth_registered/points", 10, &pclCallback);
   alt_pub = node.advertise<std_msgs::Float32>("average_depth", 1);

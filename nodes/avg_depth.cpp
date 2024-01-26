@@ -12,15 +12,12 @@ double roll = 0;
 double pitch = 0;
 double yaw = 0;
 double h = 0;
+double rate = 5;
+const auto pclCloud = boost::make_shared<pcl_ros_wrapper::PointCloudT>();
 ros::Publisher alt_pub;
 
-void pclCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud_ptr)
+void avgDepthPubCallback(const ros::TimerEvent& event)
 {
-	const auto pclCloud = boost::make_shared<pcl_ros_wrapper::PointCloudT>();
-	pcl::fromROSMsg(*cloud_ptr, *pclCloud);
-	std::vector<int> v;
-	pcl::removeNaNFromPointCloud(*pclCloud, *pclCloud, v);
-
 	//get box
 	//pcl::PointCloud<pcl::PointXYZ>::Ptr cropped_pclcloud (new pcl::PointCloud<pcl::PointXYZ>);
 	Eigen::Vector4f centr (0.0, 0.0, 0.0, 0.0);
@@ -42,6 +39,15 @@ void pclCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud_ptr)
   std_msgs::Float32 avg_height_msg;
   avg_height_msg.data = h;
   alt_pub.publish(avg_height_msg);
+
+}
+
+
+void pclCallback(const sensor_msgs::PointCloud2::ConstPtr& cloud_ptr)
+{
+	pcl::fromROSMsg(*cloud_ptr, *pclCloud);
+	std::vector<int> v;
+	pcl::removeNaNFromPointCloud(*pclCloud, *pclCloud, v);
 }
 
 void imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
@@ -64,12 +70,14 @@ void imuCallback(const sensor_msgs::Imu::ConstPtr& msg)
 
 int main(int argc, char** argv){
   ros::init(argc, argv, "camera_depth");
-  //ros::NodeHandle private_node("~");
-
+  // ros::NodeHandle private_node("~");
+  
   ros::NodeHandle node;
+  node.getParam("/camera_depth/rate", rate); 
   ros::Subscriber imu_sub = node.subscribe("mavros/imu/data", 10, &imuCallback);
   ros::Subscriber pcl_sub = node.subscribe("camera/depth_registered/points", 10, &pclCallback);
   alt_pub = node.advertise<std_msgs::Float32>("average_depth", 1);
+  ros::Timer avg_depth_timer = node.createTimer(ros::Duration(1/rate), avgDepthPubCallback);
 
   ros::spin();
   return 0;
